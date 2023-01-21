@@ -1,0 +1,24 @@
+.SideMenu {
+  width: 240px;
+  padding: 10px;
+  background-color: var(--color-bg-side);
+  color: white;
+}
+
+.SideMenuButton {
+  border: 1px solid var(--color-button-border);
+  border-radius: 0.365rem;
+  transition: var(--transition-button);
+  text-align: left;
+  padding: 12px;
+}
+
+.SideMenuButton span {
+  padding-left: 6px;
+  padding-right: 12px;
+  font-weight: 900;
+}
+
+.SideMenuButton:hover {
+  background-color: var(--color-button-hover);
+}

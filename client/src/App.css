@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+:root {
+  --color-bg-side: rgb(32 33 35);
+  --color-bg-user: rgb(52 53 65);
+  --color-bg-gpt: rgb(68 70 84);
+  --color-text: #fff;
+  
+  --font-content: "Montserrat", sans-serif;
+  --font-size: 0.9rem;
+  
+  --color-button-border: rgba(255, 255, 255, 0.2);
+  --color-button-hover: rgba(255, 255, 255, 0.06);
+  --transition-button: ease 0.20s;
+
+  --color-bg-icon-gpt: rgb(59 163 129);
+  --color-bg-icon-user: rgb(81 60 215);
+
+  --color-bg-chat-input: rgb(64 65 79);
+}
+
+.App {
+  font-family: var(--font-content);
+  font-size: var(--font-size);
+  line-height: 1.75rem;
+  text-align: center;
+  display: flex;
+  background-color: var(--color-bg-user);
+  color: var(--color-text);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
