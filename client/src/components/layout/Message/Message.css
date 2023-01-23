@@ -1,0 +1,48 @@
+.ChatMessageWrapper {
+  padding: 12px;
+}
+
+.User {
+  background-color: var(--color-bg-user);
+  border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+
+.User .ChatMessage .MessageAvatar {
+  background-color: var(--color-bg-icon-user);
+}
+
+.User .ChatMessage .MessageContent {
+  font-weight: 600;
+}
+
+.Gpt {
+  background-color: var(--color-bg-gpt);
+}
+
+.Gpt .ChatMessage .MessageAvatar {
+  background-color: var(--color-bg-icon-gpt);
+}
+
+.ChatMessage {
+  display: flex;
+  padding: 12px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80%;
+}
+
+.MessageAvatar {
+  position: relative;
+  height: 42px;
+  width: 42px;
+  justify-items: center;
+  transform: scale(0.8);
+}
+
+.MessageAvatarSvg {
+  transform: scale(0.7);
+}
+
+.MessageContent {
+  padding-left: 32px;
+}

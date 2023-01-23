@@ -1,73 +1,42 @@
 .Chat {
   flex: 1;
   position: relative;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.Chat::-webkit-scrollbar {
+  display: none;
 }
 
 .ChatLog {
   text-align: left;
-}
-
-.ChatMessageWrapper {
-  padding: 12px;
-}
-
-.User {
-  background-color: var(--color-bg-user);
-  border-bottom: 1px solid rgba(0,0,0,0.3);
-}
-
-.User .ChatMessage .MessageAvatar {
-  background-color: var(--color-bg-icon-user);
-}
-
-.User .ChatMessage .MessageContent {
-  font-weight: 600;
-}
-
-.Gpt {
-  background-color: var(--color-bg-gpt);
-}
-
-.Gpt .ChatMessage .MessageAvatar {
-  background-color: var(--color-bg-icon-gpt);
-}
-
-.ChatMessage {
-  display: flex;
-  padding: 12px;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 80%;
-}
-
-.MessageAvatar {
   position: relative;
-  height: 42px;
-  width: 42px;
-  justify-items: center;
-  transform: scale(0.8);
 }
 
-.MessageAvatarSvg {
-  transform: scale(0.7);
-}
-
-.MessageContent {
-  padding-left: 32px;
+.ChatInputWrapper {
+  position: relative
 }
 
 .ChatInput {
-  position: absolute;
+  position: fixed;
   bottom: 24px;
-  left: 50%;
+  left: 60%;
   transform: translateX(-50%);
   resize: none;
   background-color: var(--color-bg-chat-input);
   color: white;
-  width: 75%;
+  width: 50%;
   border: none;
   outline: none;
   border-radius: 0.375rem;
   padding: 14px;
-  box-shadow: 0 0 8px 0 rgba(0,0,0,0.3)
+  box-shadow: 0 0 8px 0 rgba(0,0,0,0.6)
+}
+
+hr {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  width: 90%;
+  box-shadow: 0 0 12px 0 rgba(0,0,0,0.8);
 }

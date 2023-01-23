@@ -1,16 +1,23 @@
 .SideMenu {
+  display: flex;
+  flex-direction: column;
   width: 240px;
   padding: 10px;
   background-color: var(--color-bg-side);
   color: white;
 }
 
+/* .NewChat {
+  margin-bottom: ;
+} */
+
 .SideMenuButton {
   border: 1px solid var(--color-button-border);
   border-radius: 0.365rem;
   transition: var(--transition-button);
   text-align: left;
-  padding: 12px;
+  padding: 8px;
+  margin-bottom: 8px;
 }
 
 .SideMenuButton span {
@@ -21,4 +28,51 @@
 
 .SideMenuButton:hover {
   background-color: var(--color-button-hover);
+}
+
+.SideMenuButton.pointer {
+  cursor: pointer;
+}
+
+.SideMenuChatContainer {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+.SideMenuChatContainer::after {
+  width: 4px;
+  border: 3px solid rgba(0,0,0,1);
+}
+
+.SideMenuChatContainer::-webkit-scrollbar {
+  display: none;
+}
+
+hr {
+  border: 1px solid var(--color-button-border);
+}
+
+.FooterWrapper {
+  position: relative;
+  height: 20%;
+}
+
+.Footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+.ChatInputAPI {
+  bottom: 24px;
+  resize: none;
+  background-color: var(--color-bg-chat-input);
+  color: white;
+  scale: 0.8;
+  border: none;
+  outline: none;
+  border-radius: 0.375rem;
+  padding: 14px;
+  box-shadow: 0 0 8px 0 rgba(0,0,0,0.6);
 }

@@ -1,49 +1,50 @@
-// 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
-
 const { Configuration, OpenAIApi } = require("openai");
 const express = require('express');
+const port = 3030;
+const app = express();
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+const cors = require('cors');
+const { response } = require("express");
+app.use(cors());
 
+const exportVar = (name, value) => {
+  process.env[name] = value;
+};
 
-const configuration = new Configuration({
-    organization: "org-ozjDrl9iyYrszmdQ88nuUNa1",
-    // apiKey: process.env.OPENAI_API_KEY,
-    apiKey: "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"
-});
-
-const openai = new OpenAIApi(configuration);
-
-async function callApi(){
-  const response = await openai.createCompletion({
+app.post('/prompt', async (req, res) => {
+  const {message} = req.body;
+  const configuration = new Configuration({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+  const openai = new OpenAIApi(configuration);
+  try {
+    const response = await openai.createCompletion({
     model: "text-davinci-003",
-    prompt: "Say something funny",
-    max_tokens: 7,
+    prompt: message,
+    max_tokens: 2048,
     temperature: 0,
   });
-  console.log(response.data.choices[0].text);
-  return (response.data)
-}
-
-// create a simple express api that calls the abobe function
-const app = express();
-const port = 3030;
-
-app.get('/', (req, res) => {
   res.json({
-    data: "root"
+    data: response.data.choices[0].text.trim()
+  }); } catch (err) {
+    res.json({
+      data: "Error: Please check your api key and try again."
+    });
+  }
+});
+
+app.post('/edit/apikey', async (req, res) => {
+  const key = req.body.key;
+  exportVar("OPENAI_API_KEY", key);
+  res.json({
+    data: "OK"
   })
 });
 
-app.get('/complete', async (req, res) => {
-  //call callApi function and return the response as a json object
-  const response = await callApi();
+app.get('/get/chats', async (req, res) => {
   res.json({
-    data: response
-  })
-});
-
-app.get('/ice', (req, res) => {
-  res.json({
-    data: "ice"
+    data: []
   })
 });
 
