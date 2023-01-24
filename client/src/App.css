@@ -17,6 +17,8 @@
   --color-bg-icon-user: rgb(81 60 215);
 
   --color-bg-chat-input: rgb(64 65 79);
+
+  color-scheme: dark;
 }
 
 .App {

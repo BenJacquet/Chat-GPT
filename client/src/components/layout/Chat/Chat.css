@@ -3,10 +3,7 @@
   position: relative;
   overflow-y: scroll;
   scroll-behavior: smooth;
-}
-
-.Chat::-webkit-scrollbar {
-  display: none;
+  padding-bottom: 128px;
 }
 
 .ChatLog {
@@ -20,7 +17,7 @@
 
 .ChatInput {
   position: fixed;
-  bottom: 24px;
+  bottom: 64px;
   left: 60%;
   transform: translateX(-50%);
   resize: none;
@@ -34,9 +31,48 @@
   box-shadow: 0 0 8px 0 rgba(0,0,0,0.6)
 }
 
-hr {
-  margin-top: 12px;
-  margin-bottom: 12px;
-  width: 90%;
-  box-shadow: 0 0 12px 0 rgba(0,0,0,0.8);
+.ClearChat {
+  position: fixed;
+  bottom: 24px;
+  left: 60%;
+  transform: translateX(-50%);
+  resize: none;
+  background-color: var(--color-bg-chat-input);
+  color: white;
+  background-color: brown;
+  border: none;
+  outline: none;
+  border-radius: 0.375rem;
+  padding: 6px;
+  box-shadow: 0 0 8px 0 rgba(0,0,0,0.6);
+  transition: var(--transition);
+}
+
+.ClearChat:active {
+  background-color: rgb(115, 42, 42);
+  box-shadow: -4 -4 12px 0 rgba(0,0,0,0.6);
+}
+
+.ClearChat:hover {
+  background-color: rgb(195, 38, 38);
+}
+
+@media screen and (max-width: 1024px) {
+  .ChatInput {
+    left: 65%;
+    width: 40%;
+  }
+  .ClearChat {
+    left: 65%;
+  }
+}
+
+@media screen and (max-width: 728px) {
+  .ChatInput {
+    left: 70%;
+    width: 40%;
+  }
+  .ClearChat {
+    left: 70%;
+  }
 }

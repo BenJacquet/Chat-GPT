@@ -2,14 +2,14 @@ import React from 'react'
 import { useState } from 'react'
 import './SideMenu.css'
 
-const SideMenu = () => {
+const SideMenu = (chatLog) => {
   const [prompt, setPrompt] = useState('');
 
   async function handleSubmit(e) {
     e.preventDefault();
     if (prompt === "") return;
     setPrompt("");
-    await fetch("http://localhost:3030/edit/apikey", {
+    await fetch("http://localhost:5000/edit/apikey", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,109 +18,8 @@ const SideMenu = () => {
       });
   }
 
-  function newChat() {
-    console.log('Placeholder for Chat')
-  }
-
   return (
     <aside className="SideMenu">
-      <div className="NewChat">
-        <div className="SideMenuButton" onClick={newChat}>
-          <span>+</span>
-          New Chat
-        </div>
-      <hr />
-      </div>
-      <div className="SideMenuChatContainer">
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      <div className="SideMenuButton" onClick={newChat}>
-        <span>-</span>
-        Placeholder for Chat
-      </div>
-      </div>
       <div className='FooterWrapper'>
         <div className='Footer'>
         <hr />

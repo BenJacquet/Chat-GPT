@@ -34,28 +34,13 @@
   cursor: pointer;
 }
 
-.SideMenuChatContainer {
-  overflow-y: scroll;
-  scroll-behavior: smooth;
-  height: 100%;
-}
-
-.SideMenuChatContainer::after {
-  width: 4px;
-  border: 3px solid rgba(0,0,0,1);
-}
-
-.SideMenuChatContainer::-webkit-scrollbar {
-  display: none;
-}
-
 hr {
   border: 1px solid var(--color-button-border);
 }
 
 .FooterWrapper {
   position: relative;
-  height: 20%;
+  height: 100%;
 }
 
 .Footer {

@@ -1,0 +1,64 @@
+version: "3"
+services:
+  # mongodb:
+  #   image: mongo
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - ./mongodb:/data/db
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: example
+  #   restart: always
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - client
+      - server
+    restart: always
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+    environment:
+      PGHOST: postgres
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: postgres
+      PGPORT: 5432
+      restart: always
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+    restart: always
