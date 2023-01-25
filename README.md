@@ -19,16 +19,14 @@ Welcome to my Chat-GPT clone, a fullstack application using React for the fronte
 1. Install [Docker](https://www.docker.com/) on your machine
 2. Clone the repository: `git clone https://github.com/BenJacquet/Chat-GPT.git`
 3. Navigate to the project directory: `cd Chat-GPT`
-4. Create a .env file containing the variables for the database: 
-    1. `touch .env`
-    2. add these fields and modify their value as you want :
-        ```
-        DB_HOST = ${DB_HOST}
-        DB_USER = ${DB_USER}
-        DB_PASSWORD = ${DB_PASSWORD}
-        DB_NAME = ${DB_NAME}
-        DB_PORT = ${DB_PORT}
-        ```
+4. Edit the placeholder .env file containing the variables for the database accordingly: 
+    ```
+    DB_HOST = 'database_host'
+    DB_USER = 'database_user'
+    DB_PASSWORD = 'database_password'
+    DB_NAME = 'database_name'
+    DB_PORT = 'database_port'
+    ```
 5. Build the Docker containers: `docker-compose build`
 6. Start the application: `docker-compose up`
 
