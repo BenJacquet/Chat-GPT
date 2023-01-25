@@ -48,7 +48,7 @@ const Chat = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({message: chatLog.map((message) => message.message).join(" ")}),
+      body: JSON.stringify({message: chatLog.map((message) => message.message).join(" "), key: localStorage.getItem("apiKey")}),
       });
     const data = await response.json();
     chatLog.push({sender : "gpt", message : data.data});

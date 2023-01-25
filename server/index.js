@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 const cors = require('cors');
 const { response } = require("express");
 app.use(cors());
-
+const axios = require('axios');
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`)
@@ -105,26 +105,27 @@ app.post('/clear/messages', async (req, res) => {
 // OPENAI PROMPT REQUEST
 
 app.post('/prompt', async (req, res) => {
-  const {message} = req.body;
-  const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-  });
-  const openai = new OpenAIApi(configuration);
-  try {
-    const response = await openai.createCompletion({
-    model: "text-davinci-003",
-    prompt: message,
-    max_tokens: 2048,
-    temperature: 0,
-  });
-  await pgClient.query("INSERT INTO chats (message, sender, date) VALUES ($1, $2, $3)", [response.data.choices[0].text.trim(), "gpt", new Date()]);
-  res.json({
-    data: response.data.choices[0].text.trim()
-  });
- } catch (err) {
-    await pgClient.query("INSERT INTO chats (message, sender, date) VALUES ($1, $2, $3)", ["Error: Please check your api key and try again.", "gpt", new Date()]);
-    res.json({
-      data: "Error: Please check your api key and try again."
+  const {message, key} = req.body;
+    const client = axios.create({
+      'Content-Type': 'application/json',
+      'headers': { 'Authorization': `Bearer ${key}` }
     });
-  }
+    const params = {
+      model: "text-davinci-003",
+      prompt: message,
+      max_tokens: 2048,
+      temperature: 0
+    }
+    await client.post('https://api.openai.com/v1/completions', params)
+    .then(async result => {
+      await pgClient.query("INSERT INTO chats (message, sender, date) VALUES ($1, $2, $3)", [result.data.choices[0].text.trim(), "gpt", new Date()]);
+      res.json({
+        data: result.data.choices[0].text.trim()
+      });
+  }).catch(async err => {
+    await pgClient.query("INSERT INTO chats (message, sender, date) VALUES ($1, $2, $3)", ['Error ' + err.response.status + ': ' + err.response.statusText, "gpt", new Date()]);
+    res.json({
+      data: 'Error ' + err.response.status + ': ' + err.response.statusText
+    });
+  });
 });
