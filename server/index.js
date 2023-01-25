@@ -17,7 +17,7 @@ app.listen(port, () => {
 
 const { Pool } = require('pg');
 const pgClient = new Pool({
-  host: 'gpt_postgres_1',
+  host: 'postgres',
   user: process.env.DB_USER,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
@@ -62,7 +62,7 @@ app.post('/edit/apikey', async (req, res) => {
 app.get('/get/messages', async (req, res) => {
   pgClient.query("SELECT * FROM chats", (err, table) => {
   res.json({
-    data: table.rows
+    data: table.rows || []
   })});
 });
 
