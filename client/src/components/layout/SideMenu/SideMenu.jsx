@@ -9,15 +9,12 @@ const SideMenu = (chatLog) => {
     e.preventDefault();
     if (prompt === "") return;
     setPrompt("");
-    // await fetch("http://localhost:5000/edit/apikey", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({key: prompt}),
-    //   });
     localStorage.setItem("apiKey", prompt);
   }
+
+  window.onbeforeunload = function() {
+    localStorage.clear();
+ }
 
   return (
     <aside className="SideMenu">
