@@ -20,6 +20,23 @@ const SideMenu = (chatLog) => {
 
   return (
     <aside className="SideMenu">
+      <p>Chat-GPT is a chatbot powered by OpenAI's GPT-3</p>
+      <ul>
+        <p>Guidelines :</p>
+        <li>Get your API key from <a href="https://beta.openai.com/account/api-keys" target="_blank" rel="noreferrer">openAI</a></li>
+        <hr />
+        <li>Put it in the field below</li>
+        <hr />
+        <li>Start chatting with GPT-3 !</li>
+      </ul>
+      <ul>
+        <p>Capabilities :</p>
+        <li>Remembers what you said earlier in the conversation</li>
+        <hr />
+        <li>Trained to decline inappropriate requests</li>
+        <hr />
+        <li>Limited knowledge of world and events after 2021</li>
+      </ul>
       <div className='FooterWrapper'>
         <div className='Footer'>
         <hr />

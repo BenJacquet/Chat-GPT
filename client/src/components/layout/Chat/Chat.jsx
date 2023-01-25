@@ -7,43 +7,39 @@ import './Chat.css'
 const Chat = () => {
   const [prompt, setPrompt] = useState('');
   const [isActive, setIsActive] = useState(true);
-  const [chatLog, setchatLog] = useState([]);
+  const [chatLog, setChatLog] = useState([]);
 
   async function getMessages() {
-    await fetch("/get/messages")
-    .then((response) => response.json())
-    .then((data) => {
-      data.data.forEach((message) => {
-        chatLog.push(message);
-      });
-    }
-  );
-}
+    await fetch("http://localhost:5000/get/messages")
+    .then(response => response.json())
+    .then(data => setChatLog(data.data || []));
+  }
 
   useEffect(() => {
     getMessages();
-  });
+  }, []);
 
   async function clearChat() {
-    await fetch("http://localhost:5000/clear/messages", {
+    const response = await fetch("http://localhost:5000/clear/messages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    setchatLog([]);
+    setChatLog([]);
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     if (prompt === "") return;
-    chatLog.push({sender : "user", message : prompt});
-    await fetch("http://localhost:5000/post/message", {
+    const input = prompt;
+    chatLog.push({sender : "user", message : input});
+    const responsePost = await fetch("http://localhost:5000/post/message", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        },
-        body: JSON.stringify({message: prompt, sender: "user"}),
+      },
+      body: JSON.stringify({message: input, sender: "user"}),
     });
     setPrompt("");
     setIsActive(false);

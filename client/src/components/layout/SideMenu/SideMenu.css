@@ -7,9 +7,15 @@
   color: white;
 }
 
-/* .NewChat {
-  margin-bottom: ;
-} */
+ul {
+  list-style-type: none;
+  padding: 0px;
+  margin-top: 48px;
+}
+
+li {
+  margin: 0px;
+}
 
 .SideMenuButton {
   border: 1px solid var(--color-button-border);

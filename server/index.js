@@ -17,18 +17,31 @@ app.listen(port, () => {
 
 const { Pool } = require('pg');
 const pgClient = new Pool({
-  user: process.env.PGUSER,
-  host: process.env.PGHOST,
-  database: process.env.PGDATABASE,
-  password: process.env.PGPASSWORD,
-  port: process.env.PGPORT
+  host: 'gpt_postgres_1',
+  user: process.env.DB_USER,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: parseInt(process.env.DB_PORT || "5432"),
 });
 
-pgClient.on("connect", client => {
-  client
+const connectToDB = async () => {
+  try {
+    await pgClient.connect();
+  } catch (err) {
+    console.log(err);
+  }
+};
+connectToDB();
+
+try {
+  pgClient.on("connect", client => {
+  pgClient
     .query("CREATE TABLE IF NOT EXISTS chats (id SERIAL PRIMARY KEY, message TEXT, sender TEXT, date TIMESTAMP)")
     .catch((err) => console.error(err));
 });
+} catch (err) {
+  console.log(err)
+}
 
 // API KEY SETUP IN ENVIRONMENT
 
@@ -47,25 +60,21 @@ app.post('/edit/apikey', async (req, res) => {
 // GET ALL MESSAGES FROM DATABASE
 
 app.get('/get/messages', async (req, res) => {
-  try {
-    const response = await pgClient.query("SELECT * FROM chats");
+  pgClient.query("SELECT * FROM chats", (err, table) => {
   res.json({
-    data: response.rows
-  })
-  } catch (err) {
-    console.log(err)
-    res.json({
-      data: err
-    })
-  }
+    data: table.rows
+  })});
 });
+
+// write a function to get all the messages from the database and send them as an array of objects to the client
+
 
 // POST MESSAGE TO DATABASE
 
 app.post('/post/message', async (req, res) => {
   const {message} = req.body;
   try {
-    const response = await pgClient.query("INSERT INTO chats (message, sender, date) VALUES ($1, $2, $3)", [message.message, message.sender, new Date()]);
+    const response = await pgClient.query("INSERT INTO chats (message, sender, date) VALUES ($1, $2, $3)", [message, "user", new Date()]);
   res.json({
     data: response
   })
@@ -108,9 +117,12 @@ app.post('/prompt', async (req, res) => {
     max_tokens: 2048,
     temperature: 0,
   });
+  await pgClient.query("INSERT INTO chats (message, sender, date) VALUES ($1, $2, $3)", [response.data.choices[0].text.trim(), "gpt", new Date()]);
   res.json({
     data: response.data.choices[0].text.trim()
-  }); } catch (err) {
+  });
+ } catch (err) {
+    await pgClient.query("INSERT INTO chats (message, sender, date) VALUES ($1, $2, $3)", ["Error: Please check your api key and try again.", "gpt", new Date()]);
     res.json({
       data: "Error: Please check your api key and try again."
     });
