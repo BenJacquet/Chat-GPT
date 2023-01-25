@@ -43,20 +43,6 @@ try {
   console.log(err)
 }
 
-// API KEY SETUP IN ENVIRONMENT
-
-const exportVar = (name, value) => {
-  process.env[name] = value;
-};
-
-app.post('/edit/apikey', async (req, res) => {
-  const key = req.body.key;
-  exportVar("OPENAI_API_KEY", key);
-  res.json({
-    data: "OK"
-  })
-});
-
 // GET ALL MESSAGES FROM DATABASE
 
 app.get('/get/messages', async (req, res) => {
