@@ -8,7 +8,6 @@ Welcome to my Chat-GPT clone, a fullstack application using React for the fronte
 - [Usage](#usage)
 - [Development](#development)
 - [Database](#database)
-- [Testing](#testing)
 - [Deployment](#deployment)
 - [Built With](#built-with)
 - [Contributing](#contributing)
