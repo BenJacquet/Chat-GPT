@@ -66,9 +66,6 @@ app.get('/get/messages', async (req, res) => {
   })});
 });
 
-// write a function to get all the messages from the database and send them as an array of objects to the client
-
-
 // POST MESSAGE TO DATABASE
 
 app.post('/post/message', async (req, res) => {
